@@ -1,0 +1,64 @@
+# TODO: Create your Kivy layout in the kv language here
+BoxLayout:
+
+    BoxLayout:
+        size_hint_x: .25
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: .4
+            Label:
+                text: "Sort by:"
+            Spinner:
+                id: spinner
+                text_autoupdate: True
+                values: app.sort_options
+                on_text: app.update_widgets()
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: "Add New Song..."
+            Label:
+                text: "Title"
+            TextInput:
+                id: title
+                value: ""
+                multiline: False
+                write_tab: False
+            Label:
+                text: "Artist"
+            TextInput:
+                id: artist
+                value: ""
+                multiline: False
+                write_tab: False
+            Label:
+                text: "Year"
+            TextInput:
+                id: year
+                value: ""
+                multiline: False
+                write_tab: False
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_y: .4
+            Button:
+                text: "add song"
+                on_release: app.handle_release_add_song(title.text, artist.text, year.text)
+            Button:
+                text: "Clear"
+                on_release: app.clear_fields()
+
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            size_hint_y: .1
+            text: app.top_status_text
+        BoxLayout:
+            orientation: 'vertical'
+            id: main
+        BoxLayout:
+            size_hint_y: .1
+            Label:
+                id: error
+                text: app.bottom_status_text
